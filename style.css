@@ -1,0 +1,46 @@
+.container {
+    width: 800px;
+    height: 800px;
+    background-image: url(kabe.png);
+    background-size: cover;
+}
+
+
+td .input_form {
+    width: 380px;
+}
+td .input_text {
+    width: 380px;
+    line-height: 5;
+}
+
+/* ここいじった */
+th {
+    width:250px;
+    text-align: right;
+    padding-right: 10px;
+}
+
+tr {
+    height:7rem;
+}
+
+.submit {
+    color  :aliceblue;
+    font-size: 3rem;
+    text-align: center;
+    margin: 10px;
+}
+input[type="submit"] {
+    background-color: #008B8B;
+    color: #fff;
+    padding: 10px 10px;
+    border: 1px solid #fff;
+}
+.submit:hover {
+    opacity: 0.6;
+}
+
+.submit2 {
+    text-align: center;
+}

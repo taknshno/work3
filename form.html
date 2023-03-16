@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>お問い合わせ</title>
+    <link rel="stylesheet" href="style.css" />
+
+    <!-- "jQuery UI"の読み込み -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <link
+      rel="stylesheet"
+      href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"
+    />
+    <script>
+      $(function () {
+        var ngDate = ["20210401", "20210402", "20210403"];
+
+        $("#datepicker").datepicker({
+          minDate: 0, // 過去日付は選択NG
+          maxDate: "+3m", // 3か月以上先は選択NG
+
+          // カレンダーを作成するときに対象日付がngDateの配列内に存在しないチェックします
+          beforeShowDay: function (date) {
+            var result;
+            var target_date =
+              date.getFullYear() +
+              ("0" + (date.getMonth() + 1)).slice(-2) +
+              ("0" + date.getDate()).slice(-2);
+            if (ngDate.indexOf(target_date) != -1) {
+              // -1は配列内に見つからなかったときに帰ってくる値
+              result = [false]; // 配列にセットすること
+            } else {
+              result = [true]; // 配列にセットすること
+            }
+            return result;
+          },
+        });
+      });
+    </script>
+
+    <!-- validationEngineの読み込み -->
+    <link rel="stylesheet" href="css/validationEngine.jquery.css" />
+    <script src="js/jquery-1.9.1.min.js"></script>
+    <!-- jQueryも忘れないでね -->
+    <script src="js/jquery.validationEngine.js"></script>
+    <script
+      src="js/languages/jquery.validationEngine-ja.js"
+      charset="UTF-8"
+    ></script>
+
+    <script type="text/javascript">
+      $(function () {
+        //　<form>タグのidを指定
+        $("#formCheck").validationEngine("attach", {
+          promptPosition: "topLeft:100", //エラーメッセージ位置の指定
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <div class="container">
+      <h1>お問い合わせフォーム</h1>
+      <form id="formCheck">
+        <table>
+          <tr>
+            <th>お名前</th>
+            <td>
+              <input
+                type="text"
+                name="name"
+                class="validate[required]"
+                placeholder="例)山田太郎"
+              />
+            </td>
+          </tr>
+          <tr>
+            <th>メールアドレス</th>
+            <td>
+              <input type="email" name="mail" class="validate[required]" />
+            </td>
+          </tr>
+          <tr>
+            <th>性別</th>
+            <td>
+              <input type="radio" name="sex" value="male" />男
+              <input type="radio" name="sex" value="female" />女
+              <input type="radio" name="sex" value="noanswer" checked />回答なし
+            </td>
+          </tr>
+          <!-- 日付の項目 -->
+          <tr>
+            <th>日付</th>
+            <td><input type="text" id="datepicker" /></td>
+          </tr>
+          <!-- 郵便番号の項目 -->
+          <tr>
+            <th>郵便番号</th>
+            <td><input type="text" /></td>
+          </tr>
+          <!-- 住所の項目 -->
+          <tr>
+            <th>住所</th>
+            <td><input class="input_form" type="text" /></td>
+          </tr>
+          <tr>
+            <th>お問い合わせ内容</th>
+            <td>
+              <textarea
+                name="question"
+                class="input_text"
+                class="text"
+                maxlength="500"
+              ></textarea>
+            </td>
+          </tr>
+        </table>
+        <div class="submit2">
+          <input class="submit" type="submit" name="送信" />
+        </div>
+      </form>
+    </div>
+  </body>
+</html>
